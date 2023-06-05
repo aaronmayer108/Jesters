@@ -1,13 +1,15 @@
-window.onload = function() {
-    var fonts = ['"Roboto", sans-serif', '"Open Sans", sans-serif', '"Lato", sans-serif'];
+document.addEventListener('DOMContentLoaded', (event) => {
+    let currentPlayer = 'X';
+    const cells = document.querySelectorAll('.cell');
+    const message = document.querySelector('#message');
 
-    document.getElementById('helloWorldButton').addEventListener('click', function() {
-        var newMessage = document.createElement('p');
-        newMessage.textContent = 'Hello, World!';
-        
-        var randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-        newMessage.style.fontFamily = randomFont;
-
-        document.getElementById('content').appendChild(newMessage);
+    cells.forEach(cell => {
+        cell.addEventListener('click', (e) => {
+            if (e.target.textContent === '') {
+                e.target.textContent = currentPlayer;
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                message.textContent = `Current player: ${currentPlayer}`;
+            }
+        });
     });
-}
+});
